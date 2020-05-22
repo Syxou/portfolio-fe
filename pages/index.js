@@ -1,14 +1,30 @@
 import Head from 'next/head'
-import styled from 'styled-components'
+import axios from 'axios';
 
+// This function gets called at build time on server-side.
+// It won't be called on client-side, so you can even do
+// direct database queries. See the "Technical details" section.
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts.
+  // You can use any data fetching library
+  const res = await axios.get('http://localhost:5000/api/page/1/data')
+  const data = res.data
 
+  // By returning { props: posts }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      data,
+    },
+  }
+}
 
-
-export default function Home() {
+function Home({ data }) {
+  console.log(data)
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>PORTFOLIO Sukhostavskyi</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@3/distr/fira_code.css" />
       </Head>
@@ -75,9 +91,4 @@ export default function Home() {
   )
 }
 
-const Header = styled.section`
-
-`;
-const H1 = styled.h1`
-
-`
+export default Home
