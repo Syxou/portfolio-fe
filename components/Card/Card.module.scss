@@ -1,0 +1,142 @@
+.card {
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+}
+
+.desc {
+    position: absolute;
+    right: -10px;
+    bottom: 93px;
+
+    span {
+        font-size: 3rem;
+        line-height: 59px;
+        padding: 12px 25px;
+        background: #000000;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 7px;
+        pointer-events: none;
+    }
+
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+
+}
+
+.descNone {
+    display: none;
+}
+
+.descData {
+    padding: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+    background: #000000;
+    width: 300px;
+    height: auto;
+    animation: show 0.3s;
+
+    h4 {
+        // animation: showText 0.5s;
+    }
+
+    a {
+        // animation: showText 0.7s;
+    }
+}
+
+.descDataP {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: left;
+    animation: showText 0.5s;
+}
+
+.btn {
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+
+    background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+    border-radius: 22px;
+    display: block;
+    width: max-content;
+}
+
+@keyframes showText {
+    0% {
+        opacity: 0;
+        font-size: 0;
+    }
+
+    75% {
+        opacity: 0;
+        font-size: initial;
+    }
+
+    80% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+        border-radius: 50% 50% 0 50%;
+    }
+
+    50% {
+        // opacity: 1;
+        border-radius: 50% 50% 0 50%;
+    }
+
+    100% {
+        opacity: 1;
+        height: auto;
+        border-radius: 7px;
+    }
+}
+
+
+
+.title {
+    position: absolute;
+    bottom: -5px;
+    left: 40px;
+    margin: 0;
+    padding: 12px 25px;
+    width: max-content;
+
+    background: #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 2.25rem;
+    line-height: 44px;
+    align-items: center;
+
+    color: #FFFFFF;
+}

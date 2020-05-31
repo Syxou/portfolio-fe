@@ -1,17 +1,50 @@
 import Head from 'next/head'
 import axios from 'axios';
+import dynamic from 'next/dynamic'
+// import Layout from 'layouts/Main';
+const Layout = dynamic(() => import('../layouts/Main'))
+const Card = dynamic(() => import('../components/Card/Card'))
 
-// This function gets called at build time on server-side.
-// It won't be called on client-side, so you can even do
-// direct database queries. See the "Technical details" section.
 export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await axios.get('http://localhost:5000/api/page/1/data')
-  const data = res.data
+  // const res = await axios.get('http://127.0.0.1:5000/api/page/1/data')
+  // const data = res.data
+  const data = {
+    fields: {
+      cf_home_title: {
+        data: "portfolio"
+      },
+      cf_home_sub_title: {
+        data: 'illia Sukhostaskyi'
+      }
+    },
+    projects: [
+      {
+        name: 'Proyal',
+        img: 'https://source.unsplash.com/random/800x600',
+        titile: 'Text Project',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+        btn_text: 'FIND_OUT_MORE',
+        url: '/',
+      },
+      {
+        name: 'Proyal',
+        img: 'https://source.unsplash.com/random/800x600',
+        titile: 'Text Project',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+        btn_text: 'FIND_OUT_MORE',
+        url: '/',
+      },
+      {
+        name: 'Proyal',
+        img: 'https://source.unsplash.com/random/800x600',
+        titile: 'Text Project',
+        desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+        btn_text: 'FIND_OUT_MORE',
+        url: '/',
+      },
 
-  // By returning { props: posts }, the Blog component
-  // will receive `posts` as a prop at build time
+    ]
+  }
   return {
     props: {
       data,
@@ -32,9 +65,16 @@ function Home({ data }) {
       <main>
         <section className='header'>
           <div className="title">
-            <h1>PORTFOLIO</h1>
-            <h1>Illia Sukhostavskyi</h1>
+            <h1>{data.fields.cf_home_title.data}</h1>
+            <h1>{data.fields.cf_home_sub_title.data}</h1>
           </div>
+        </section>
+        <section className='card-grid'>
+          {
+            data.projects.map((p, i) => (
+              <Card key={i} project={p} id={i} />
+            ))
+          }
         </section>
       </main>
       <footer>
@@ -53,21 +93,37 @@ function Home({ data }) {
       h1{
         font-style: normal;
         font-weight: bold;
-        font-size: 64px;
+        font-size: 4rem;
         line-height: 79px;
-        display: flex;
         align-items: center;
         text-align: center;
         margin:0;
         color: #FFFFFF;
       }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
+      .card-grid{
+        margin-top: 75px;
+        display: grid;
+        grid-template-columns: repeat(2, fit-content(40%));
+        align-items: start;
+        justify-content: center;
+        grid-gap: 50px;
+      }
+      @media(max-width: 1000px) {
+        .card-grid {
+            grid-template-columns: repeat(1, fit-content(80%));
+        }
+       
+      }
+        @media (max-width: 768px) {
+          .card-grid {
+            grid-template-columns: repeat(1, fit-content(90%));
+        }
+          h1{
+            font-size: 2rem;
           }
         }
+
+
       `}</style>
 
       <style jsx global>{`
@@ -87,7 +143,7 @@ function Home({ data }) {
           box-sizing: border-box;
         }
       `}</style>
-    </div >
+    </div>
   )
 }
 
