@@ -9,23 +9,23 @@ export default function Card({ project, id }) {
     const [width, setWidth] = useState(0)
 
 
-    const handleViewPort = () => {
-        if (!el) return
-        if (width < 1024) {
-            const folow = el.getBoundingClientRect()
-            console.log(id, folow, width)
-            if (folow.top >= 0 && folow.left >= 0 && folow.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-                folow.bottom <= (window.innerHeight || document.documentElement.clientHeight))
-                return setHover(true)
-            else
-                return setHover(false)
-        }
-        return null
-    }
+
 
     useEffect(() => {
-        window.addEventListener('scroll', handleViewPort);
+        const handleViewPort = () => {
+            if (!el) return
+            if (width < 1024) {
+                const folow = el.getBoundingClientRect()
+                if (folow.top >= 0 && folow.left >= 0 && folow.right <= (window.innerWidth || document.documentElement.clientWidth) &&
+                    folow.bottom <= (window.innerHeight || document.documentElement.clientHeight))
+                    return setHover(true)
+                else
+                    return setHover(false)
+            }
+        }
         setWidth(window.innerWidth)
+        window.addEventListener('scroll', handleViewPort);
+        return () => window.removeEventListener('scroll', handleViewPort)
     })
 
     return (
