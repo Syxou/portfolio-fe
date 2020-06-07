@@ -1,5 +1,5 @@
+import { useState, useEffect, useCallback } from 'react'
 import styles from './Card.module.scss'
-import { useState, useEffect } from 'react'
 
 
 export default function Card({ project, id }) {
@@ -8,16 +8,12 @@ export default function Card({ project, id }) {
     const [el, setEl] = useState(false)
     const [width, setWidth] = useState(0)
 
-    useEffect(() => {
-        window.addEventListener('scroll', hendleViewPort);
-        setWidth(window.innerWidth)
-    })
 
-    const hendleViewPort = () => {
+    const handleViewPort = () => {
         if (!el) return
         if (width < 1024) {
             const folow = el.getBoundingClientRect()
-            console.log(folow, width)
+            console.log(id, folow, width)
             if (folow.top >= 0 && folow.left >= 0 && folow.right <= (window.innerWidth || document.documentElement.clientWidth) &&
                 folow.bottom <= (window.innerHeight || document.documentElement.clientHeight))
                 return setHover(true)
@@ -26,6 +22,11 @@ export default function Card({ project, id }) {
         }
         return null
     }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleViewPort);
+        setWidth(window.innerWidth)
+    })
 
     return (
         <div className={styles.card}

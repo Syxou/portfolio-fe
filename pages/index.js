@@ -19,6 +19,7 @@ export async function getStaticProps() {
     },
     projects: [
       {
+        id: 0,
         name: 'Proyal',
         img: 'https://source.unsplash.com/random/800x600',
         titile: 'Text Project',
@@ -27,6 +28,7 @@ export async function getStaticProps() {
         url: '/',
       },
       {
+        id: 1,
         name: 'Proyal',
         img: 'https://source.unsplash.com/random/800x600',
         titile: 'Text Project',
@@ -35,6 +37,7 @@ export async function getStaticProps() {
         url: '/',
       },
       {
+        id: 2,
         name: 'Proyal',
         img: 'https://source.unsplash.com/random/800x600',
         titile: 'Text Project',
@@ -72,7 +75,7 @@ function Home({ data }) {
         <section className='card-grid'>
           {
             data.projects.map((p, i) => (
-              <Card key={i} project={p} id={i} />
+              <Card key={p.id} project={p} id={p.id} />
             ))
           }
         </section>
@@ -141,6 +144,11 @@ function Home({ data }) {
           font-family: 'Fira Code', monospace;
           font-size: 16px;
           box-sizing: border-box;
+        }
+        @media (max-width: 768px) {
+          * {
+            font-size: 14px;
+          }
         }
       `}</style>
     </div>
